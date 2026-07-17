@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1B7A3D" />
+    <meta
+      name="description"
+      content="GoalVerse AI — the FIFA World Cup 2026 living stadium companion for navigation, crowd intelligence, accessibility, and more."
+    />
+    <!--
+      CSP meta tag: the previous version of this app relied only on Helmet's
+      CSP headers on the Express API (server/src/middleware/security.ts),
+      which never protects the actual HTML document a browser loads — that
+      document is served by the static client build, not the API. This meta
+      tag covers the real attack surface (the page itself). Font origins are
+      explicitly allow-listed since this page loads Google Fonts.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self';"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>GoalVerse AI — The Living Stadium</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

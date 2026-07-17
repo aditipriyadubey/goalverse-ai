@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-scale: 1;
+  color-scheme: light;
+}
+
+html {
+  font-size: calc(16px * var(--font-scale));
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-field-white text-pitch-dark font-body antialiased;
+}
+
+html.dark body {
+  @apply bg-pitch-dark text-field-white;
+}
+
+/* Visible, high-contrast focus ring everywhere — never suppressed. */
+:focus-visible {
+  outline: 3px solid theme('colors.trophy.gold');
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip link: hidden until focused, then jumps to the front of the visual order. */
+.skip-link {
+  @apply absolute left-2 top-2 z-50 -translate-y-16 bg-fifa-blue text-field-white px-4 py-2 rounded-pitch font-semibold transition-transform;
+}
+.skip-link:focus {
+  @apply translate-y-0;
+}
+
+/* High-contrast mode: flattens gradients/soft colors into pure black/white/yellow. */
+html.high-contrast body {
+  background: #000 !important;
+  color: #fff !important;
+}
+html.high-contrast .hc-invert {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #ffd60a !important;
+}
+html.high-contrast a,
+html.high-contrast button {
+  color: #ffd60a !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}

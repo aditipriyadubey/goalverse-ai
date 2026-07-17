@@ -1,0 +1,83 @@
+// GoalVerse AI - Prisma schema
+// SQLite is used deliberately (no external DB service, no Docker, zero cost).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Gate {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g. "Gate 4"
+  zone        String // e.g. "North"
+  capacity    Int
+  wheelchairAccessible Boolean @default(true)
+  readings    CrowdReading[]
+  createdAt   DateTime @default(now())
+}
+
+model PointOfInterest {
+  id          String   @id @default(cuid())
+  name        String
+  category    String // washroom | food | merchandise | medical | quiet_zone | family_zone | exit | seat_block
+  zone        String
+  x           Float // position on the stadium map (0-100)
+  y           Float
+  halal       Boolean  @default(false)
+  wheelchairAccessible Boolean @default(true)
+  description String?
+  createdAt   DateTime @default(now())
+}
+
+model CrowdReading {
+  id         String   @id @default(cuid())
+  gateId     String
+  gate       Gate     @relation(fields: [gateId], references: [id])
+  density    Float // 0.0 - 1.0
+  level      String // green | yellow | orange | red
+  recordedAt DateTime @default(now())
+}
+
+model Itinerary {
+  id            String   @id @default(cuid())
+  ownerName     String
+  matchName     String
+  seatSection   String
+  arrivalTime   DateTime
+  companions    Int      @default(1)
+  transportMode String // walk | metro | bus | rideshare | bike
+  weatherNote   String?
+  planJson      String // serialized AI-generated plan
+  createdAt     DateTime @default(now())
+}
+
+model LostFoundReport {
+  id          String   @id @default(cuid())
+  itemDesc    String
+  location    String
+  status      String   @default("open") // open | matched | closed
+  reportedBy  String
+  createdAt   DateTime @default(now())
+}
+
+model IncidentReport {
+  id          String   @id @default(cuid())
+  type        String // medical | crowd | security | facilities
+  severity    String // low | medium | high
+  zone        String
+  description String
+  status      String   @default("open")
+  createdAt   DateTime @default(now())
+}
+
+model EcoLog {
+  id           String   @id @default(cuid())
+  userAlias    String
+  transportMode String
+  co2SavedKg   Float
+  createdAt    DateTime @default(now())
+}
