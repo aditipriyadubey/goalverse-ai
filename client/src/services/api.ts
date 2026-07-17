@@ -13,6 +13,8 @@ import type {
   IncidentReport,
 } from '../types/api';
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
+
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -25,7 +27,7 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${API_BASE}/api${path}`, {
     ...init,
     headers: { 'Content-Type': 'application/json', ...init?.headers },
   });
