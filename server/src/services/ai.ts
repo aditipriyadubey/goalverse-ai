@@ -66,13 +66,17 @@ async function callGeminiRaw(prompt: string): Promise<string> {
     }),
   });
 
+
   if (!res.ok) {
-    const status = res.status;
-    // 429/5xx are treated as retryable by the caller; 4xx (other than 429) are not.
-    const err = new Error(`GEMINI_HTTP_${status}`);
-    (err as Error & { retryable?: boolean }).retryable = status === 429 || status >= 500;
-    throw err;
-  }
+  console.error("Gemini Error Response:");
+  console.error(await res.text());
+
+  const status = res.status;
+
+  const err = new Error(`GEMINI_HTTP_${status}`);
+  (err as Error & { retryable?: boolean }).retryable = status === 429 || status >= 500;
+  throw err;
+}
 
   const data = (await res.json()) as {
     candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;

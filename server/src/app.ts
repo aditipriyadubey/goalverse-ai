@@ -17,6 +17,7 @@ import { organizerRouter } from './routes/organizer.js';
  */
 export function createApp() {
   const app = express();
+  app.set("trust proxy", 1); 
 
   app.disable('x-powered-by');
   app.use(helmetMiddleware);
