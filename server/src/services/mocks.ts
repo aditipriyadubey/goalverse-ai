@@ -99,7 +99,10 @@ export function mockTranslate(text: string, targetLang: string): TranslationResp
   return {
     detectedLanguage: 'en',
     // Honest mock: we do not attempt real translation without an AI key.
-    translatedText: `[${SUPPORTED_LANGS[target]} translation unavailable offline] ${text}`,
+    translatedText:
+    "Looks like GoalVerse AI has been getting a lot of love! ⚽💙\n\n" +
+    "AditiPriya's free Gemini API quota has been exhausted for today due to heavy usage.\n\n" +
+    "Thank you for exploring the project.\nPlease try again after the quota resets. 🚀",
     targetLanguage: target,
   };
 }
