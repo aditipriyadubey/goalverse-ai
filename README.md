@@ -1043,13 +1043,13 @@ Render's free tier uses ephemeral storage — the SQLite database resets on rede
 
 ---
 
-## 👥 Team
+## 👥 The Woman behind all :)
 
 <!-- Replace with your actual team details -->
 
 | Name | Role | GitHub |
 |---|---|---|
-| **Your Name** | Full Stack Developer & AI Architect | [@your-handle](https://github.com/your-handle) |
+| **Aditipriya** | Full Stack Developer & AI Architect | [@aditipriyadubey](https://github.com/aditipriyadubey) |
 
 ---
 
